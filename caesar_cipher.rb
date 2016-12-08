@@ -1,20 +1,20 @@
 def caesar_cipher(string, number)
   encrypt_this = string.split(//)
   encrypt_this.map! do |i|
-    if /[a-z]/.match(i)
-      i = i.ord
-      i = i +=number
-      if i > 122
-        i = i - 26
+    if /[a-z]/ =~ i # First I use a regexp to search for lowercase letters
+      i = i.ord # Then I convert the letter to its ACSII number
+      i += number # Now I shift the ACSII number n places
+      if i > 122  # This loops letters shifted further than the alphabet
+        i -= 26
       end
-    elsif /[A-Z]/.match(i)
+    elsif /[A-Z]/ =~ i
       i = i.ord
-      i = i +=number
+      i += number
       if i > 90
-        i = i - 26
+        i -= 26
       end
     end
-    i = i.chr
+    i.chr # Finally I convert the number back into its relevant ACSII letter
   end
   puts encrypt_this.join
 end
